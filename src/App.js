@@ -10,10 +10,11 @@ import NavigationBar from './components/NavigationBar'
 function App() {
   return (
     <>
-    <NavigationBar/>
+    
     <Switch>
     <Route exact path="/" component={Home}/>
     <Route exact path="/struttura" component={Struttura}/>
+    <Route exact path="/registrazione" component={FormRegistrazioneUtente}/>
     <Route component={Error}/>
     </Switch>
 
