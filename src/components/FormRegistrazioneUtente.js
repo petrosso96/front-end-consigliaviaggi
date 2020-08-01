@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
+import axios from 'axios';
 
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -14,15 +15,21 @@ class FormRegistrazioneUtente extends Component{
         super(props);
 
         this.state = {
+          nomeUtente:"",
           nome:"",
-          cognome:"",
-          nomeUtente:"",  
+          cognome:"",  
           indirizzoEmail:"",
           password:"",
           confermaPassword:"",
-          gender:"",
-          cittàDiProvenienza:"",
-          dataDiNascita: new Date()
+          sesso:"",
+          city:"",
+          dataDiNascita: new Date(),
+          nomeError:"",
+          cognomeError:"",
+          nomeUtenteError:"",
+          indirizzoEmailError:"",
+          passwordError:"",
+          cityError:""
 
         };
 
@@ -35,6 +42,12 @@ class FormRegistrazioneUtente extends Component{
         this.handleSubmit = this.handleSubmit.bind(this);
 
     }
+
+
+
+
+
+
     handleDataChange(date) {
         this.setState({
             dataDiNascita:date
@@ -52,19 +65,19 @@ class FormRegistrazioneUtente extends Component{
         }
         else{
 
-            if(name === "maschio"){
+            if(value === "maschio"){
                 this.setState({
-                    gender:"maschio"
+                    sesso:"maschio"
                 }); 
             }
-            else if(name === "femmina"){
+            else if(value === "femmina"){
                 this.setState({
-                    gender:"femmina"
+                    sesso:"femmina"
                 });  
             }
             else{
                 this.setState({
-                    gender:"altro"
+                    sesso:"altro"
                 }); 
             }
         }
@@ -76,7 +89,31 @@ class FormRegistrazioneUtente extends Component{
     }
 
     handleSubmit(e) {
-        this.clearForm();
+        e.preventDefault();
+
+        const utente  = {
+
+            nomeUtente:this.state.nomeUtente,
+            nome:this.state.nome,
+            cognome:this.state.cognome,  
+            indirizzoEmail:this.state.indirizzoEmail,
+            password:this.state.password,
+            sesso:this.state.sesso,
+            city:this.state.city,
+            dataDiNascita:this.state.dataDiNascita,
+
+        }
+
+        console.log(utente);
+  
+        axios({
+          method: "post",
+          url: "http://localhost:8080/all/registrazione",
+          data: utente
+        })
+
+
+        
       }
 
     
@@ -108,19 +145,24 @@ class FormRegistrazioneUtente extends Component{
           <br/>
           <label htmlFor="Password" >
               Password:
-              <input type="text" name="password" onChange={this.hanldeChange} value={this.state.password}/>
+              <input type="password" name="password" onChange={this.hanldeChange} value={this.state.password}/>
           </label>
           <br/>
           <label htmlFor="confermaPassword">
               Conferma Password:
-              <input type="text" name="ConfermaPassword" onChange={this.hanldeChange} value={this.state.confermaPass}/>
+              <input type="password" name="confermaPassword" onChange={this.hanldeChange} value={this.state.confermaPassword}/>
           </label>
           <br/>
           <label htmlFor="Sesso">
               Sesso:
-              <input type="radio" name="maschio" onChange={this.hanldeChange} value="maschio" checked={this.state.gender === "maschio"}/>
-              <input type="radio" name="femmina" onChange={this.hanldeChange} value="femmina" checked={this.state.gender === "femmina"}/>
-              <input type="radio" name="altro" onChange={this.hanldeChange} value="altro"     checked={this.state.gender === "altro"}/>
+              <input type="radio" name="sesso" onChange={this.hanldeChange} value="maschio" checked={this.state.sesso === "maschio"}/>
+              <input type="radio" name="sesso" onChange={this.hanldeChange} value="femmina" checked={this.state.sesso === "femmina"}/>
+              <input type="radio" name="sesso" onChange={this.hanldeChange} value="altro"     checked={this.state.sesso === "altro"}/>
+          </label>
+          <br/>
+          <label htmlFor="Città">
+              Città
+              <input type="text" name="city" onChange={this.hanldeChange} value={this.state.city} />
           </label>
           <br/>
           <label htmlFor="Data di nascita">
@@ -128,12 +170,12 @@ class FormRegistrazioneUtente extends Component{
               selected={this.state.dataDiNascita}
               onChange={this.handleDataChange}
               name="dataDiNascita"
-              dateFormat="dd/MM/yyyy"
+              dateFormat="yyyy/MM/dd"
               />
           </label>
           <br/>
           <label>
-              <input type="submit" value="Registrati"/>
+              <input type="submit" value="Registrati" onClick={this.handleSubmit}/>
           </label>
           <input type="button" value="Annulla" onClick={this.clearForm}/>          
 
