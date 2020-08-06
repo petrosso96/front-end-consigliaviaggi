@@ -1,4 +1,8 @@
+.root{
 
+    background-color: blue;
+
+}
 
 
 .DatePickerRegistrazione {
@@ -9,4 +13,9 @@
     top: 20px;
     width: 200px;
 
+}
+
+.NavigationBar {
+
+    color: black;
 }

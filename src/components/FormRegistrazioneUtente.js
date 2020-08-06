@@ -10,8 +10,8 @@ import'mdbreact/dist/css/mdb.css';
 import "react-datepicker/dist/react-datepicker.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {MDBBadge,MDBFormInline,MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBInput } from 'mdbreact';
-import { withTheme } from '@material-ui/core';
+import {MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBInput } from 'mdbreact';
+
 
 
 
@@ -82,8 +82,7 @@ class FormRegistrazioneUtente extends Component{
 
         }
                 
-        console.log(name)
-        console.log(value)
+
 
     }
 
@@ -275,7 +274,7 @@ render(){
 
     );
       
-    };
+    }
     
  /*
     return(

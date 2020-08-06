@@ -7,8 +7,14 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 
 import logo from '../images/Logo.svg';
+import Menu from '@material-ui/core/Menu';
 
 const useStyles = makeStyles((theme) => ({
+  menuNavigationBar:{
+
+    position:"154px",
+    size:"189px"
+  },
   logo:{
     width: '250px',
     height:'70px',
@@ -66,24 +72,21 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-}));
+}
+));
 
 export default function NavigationBar() {
   const classes = useStyles();
+  const menuIcon = <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M2 13.5h14V12H2v1.5zm0-4h14V8H2v1.5zM2 4v1.5h14V4H2z"/></svg>
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-        <img src={logo} className={classes.logo}></img>
-        <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            
+    <div className="NavigationBar">
+      <AppBar position="static" color="inherit">
+        <Toolbar >
+        <img src={logo} alt="COnsiglia viaggi" className={classes.logo}></img>
+        <IconButton edge="false" className={classes.menuButton} color="inherit" aria-label="menu">
         </IconButton>
+
           <div className={classes.search}>
             <div className={classes.searchIcon}>
             <SearchIcon />
@@ -96,6 +99,10 @@ export default function NavigationBar() {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
+          <IconButton edge="false" className={classes.menuNavigationBar} color="inherit" aria-label="menu">
+            <Menu></Menu>
+            {menuIcon}
+          </IconButton>
           </div>
         </Toolbar>
       </AppBar>
