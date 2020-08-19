@@ -13,13 +13,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBInput } from 'mdbreact';
 
 
-
-
-
-
-
-
-
 class FormRegistrazioneUtente extends Component{
 
     constructor(props) {
@@ -276,71 +269,7 @@ render(){
       
     }
     
- /*
-    return(
-    <div className="FormRegistrazioneUtente">
 
-    <label htmlFor="nome">
-        Nome:
-        <input type="text" name="nome" onChange={this.hanldeChange} value={this.state.nome} className="NomeFormRegistrazioneUtente"/>
-    </label>
-    <br/>
-    <label htmlFor="cognome">
-        Cognome:
-        <input type="text" name="cognome" onChange={this.hanldeChange} value={this.state.cognome} className="NomeFormRegistrazioneUtente"/>
-    </label>
-    <br/>
-    <label htmlFor="indirizzoEmail">
-        Indirizzo email:
-        <input type="text" name="indirizzoEmail" onChange={this.hanldeChange} value={this.state.indirizzoEmail} className="NomeFormRegistrazioneUtente"/>
-    </label>
-    <br/>
-    <label htmlFor="nomeUtente">
-        Nome Utente:
-        <input type="text" name="nomeUtente" onChange={this.hanldeChange} value={this.state.nomeUtente} className="NomeFormRegistrazioneUtente"/>
-    </label>
-    <br/>
-    <label htmlFor="Password" >
-        Password:
-        <input type="password" name="password" onChange={this.hanldeChange} value={this.state.password} className="NomeFormRegistrazioneUtente"/>
-    </label>
-    <br/>
-    <label htmlFor="confermaPassword">
-        Conferma Password:
-        <input type="password" name="confermaPassword" onChange={this.hanldeChange} value={this.state.confermaPassword} className="NomeFormRegistrazioneUtente"/>
-    </label>
-    <br/>
-    <label htmlFor="Città">
-        Città
-        <input type="text" name="city" onChange={this.hanldeChange} value={this.state.city} className="NomeFormRegistrazioneUtente" />
-    </label>
-    <br/>
-    <label htmlFor="Sesso">
-        Sesso:
-        <input type="radio" name="sesso" onChange={this.hanldeChange} value="maschio" checked={this.state.sesso === "maschio"} />
-        <input type="radio" name="sesso" onChange={this.hanldeChange} value="femmina" checked={this.state.sesso === "femmina"}/>
-        <input type="radio" name="sesso" onChange={this.hanldeChange} value="altro"     checked={this.state.sesso === "altro"}/>
-    </label>
-
-    <br/>
-    <label htmlFor="Data di nascita">
-        <DatePicker
-        selected={this.state.dataDiNascita}
-        onChange={this.handleDataChange}
-        name="dataDiNascita"
-        dateFormat="yyyy/MM/dd"
-        />
-    </label>
-    <br/>
-    <label>
-        <input type="submit" value="Registrati" onClick={this.handleSubmit}/>
-    </label>
-    <input type="button" value="Annulla" onClick={this.clearForm}/>          
-    
-    </div>
-    )   
-
-    */
 
 }
 

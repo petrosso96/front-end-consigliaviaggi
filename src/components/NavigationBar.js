@@ -5,25 +5,24 @@ import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-
+import FiltriPopUp from './FiltriPopUp'
 import logo from '../images/Logo.svg';
-import Menu from '@material-ui/core/Menu';
+import MenuNavBar from './MenùNavBar';
+
 import axios from 'axios';
 
 
-const useStyles = makeStyles((theme) => ({
-  menuNavigationBar:{
 
-    position:"154px",
-    size:"189px"
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
   },
   logo:{
     width: '250px',
     height:'70px',
   },  
-  root: {
-    flexGrow: 1,
-  },
+
   menuButton: {
     marginRight: theme.spacing(50),
     
@@ -36,12 +35,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   search: {
+    display: 'flex',
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
+
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
@@ -79,6 +80,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavigationBar() {
   const [ricerca, setFieldRicerca] = React.useState('');
+  const [nomeCity, setCity] = React.useState(null);
+  const [prezzoStruttura, setPrezzo] = React.useState(-1);
+  const [nomeCategoria, setCategoria] = React.useState(null);
   const classes = useStyles();
   const menuIcon = <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M2 13.5h14V12H2v1.5zm0-4h14V8H2v1.5zM2 4v1.5h14V4H2z"/></svg>
 
@@ -89,26 +93,22 @@ export default function NavigationBar() {
   };
 
   const ricercaStrutture = (nomeStruttura) => {
-    console.log(nomeStruttura);
 
-    const oggettoRicerca  = {
 
-      nome:"Pizzeria la Notizia",
-      city:null,
-      categoria:null,  
+
+    axios.post(`http://localhost:8080/all/ricerca`, {       
+      nome:ricerca,
+      city:nomeCity,
+      categoria:nomeCategoria,  
       latitudine:-1,
       longitudine:-1,
       distanza:-1,
-      prezzo:-1,
-    }
-
-    console.log(oggettoRicerca)
-
-
-    axios.post(`http://localhost:8080/all/ricerca`, { oggettoRicerca })
+      prezzo:prezzoStruttura, 
+    })
     .then(res => {
       console.log(res);
       console.log(res.data);
+
       
     })
     
@@ -117,14 +117,28 @@ export default function NavigationBar() {
   };
 
   const keyPress = (e) => {
-    if(e.keyCode === 13){
+    if(e.keyCode === 13){//tasto invio 
       ricercaStrutture(e.target.value)
 
-
-      
     }
 
   }
+
+
+  const handleCityChangeNavigationBar  = (cityValue)=>{
+    setCity(cityValue)
+  }
+
+  const handlePrezzoChangeNavigationBar = (prezzoValue) => {
+    setPrezzo(prezzoValue)
+
+  }
+
+  const handleCategoriaChangeNavigationBar = (categoriaValue) => {
+    setCategoria(categoriaValue)
+
+  }
+
 
   const clearField = () =>{ setFieldRicerca("") }
 
@@ -132,8 +146,8 @@ export default function NavigationBar() {
     <div className="NavigationBar">
       <AppBar position="static" color="inherit">
         <Toolbar >
-        <img src={logo} alt="COnsiglia viaggi" className={classes.logo}></img>
-        <IconButton edge="false" className={classes.menuButton} color="inherit" aria-label="menu">
+        <img src={logo} alt="Consiglia viaggi" className={classes.logo}></img>
+        <IconButton  className={classes.menuButton} color="inherit" aria-label="menu">
         </IconButton>
 
           <div className={classes.search}>
@@ -149,20 +163,19 @@ export default function NavigationBar() {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
-              defaultValue=""
               id="ricerca"
               value={ricerca}
               onChange={handleChange}
-              onEnter={ricercaStrutture}
               onKeyDown={keyPress}
-              
             />
-          <IconButton edge="false" className={classes.menuNavigationBar} color="inherit" aria-label="menu">
-            <Menu></Menu>
-            {menuIcon}
-          </IconButton>
+            <FiltriPopUp handleCityChange={handleCityChangeNavigationBar} handlePrezzoChange={handlePrezzoChangeNavigationBar} handleCategoriaChange={handleCategoriaChangeNavigationBar}></FiltriPopUp>
+            
+            <MenuNavBar />
+            
+           
           </div>
-        </Toolbar>
+
+        </Toolbar> 
       </AppBar>
     </div>
   );

@@ -1,0 +1,10 @@
+.root {
+    display: 'flex',
+    flexWrap 'wrap',
+  }
+.textField {
+    width: '25ch'
+  }
+.categoria{
+  display: flex;
+}

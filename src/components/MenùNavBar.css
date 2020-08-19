@@ -1,0 +1,5 @@
+.position{
+    position: absolute;
+    display: flex;
+    width: 50%;
+}
