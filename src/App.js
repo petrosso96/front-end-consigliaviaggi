@@ -5,7 +5,8 @@ import Home from './pagine/Home'
 import {Route, Switch} from 'react-router-dom'
 import Struttura from './pagine/Struttura';
 import NavigationBar from './components/NavigationBar'
-
+import Ricerca from './pagine/Ricerca';
+import LineeGuida from './components/LineeGuida'
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
     <Route exact path="/" component={Home}/>
     <Route exact path="/struttura" component={Struttura}/>
     <Route exact path="/registrazione" component={FormRegistrazioneUtente}/>
+    <Route exact path="/ricerca" component={Ricerca}/>
+    <Route exact path="/lineeguida" component={LineeGuida}/>
     <Route component={Error}/>
     </Switch>
 
