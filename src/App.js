@@ -7,6 +7,7 @@ import Struttura from './pagine/Struttura';
 import NavigationBar from './components/NavigationBar'
 import Ricerca from './pagine/Ricerca';
 import LineeGuida from './components/LineeGuida'
+import AggiungiStruttura from './pagine/AggiungiStruttura';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
     <Route exact path="/registrazione" component={FormRegistrazioneUtente}/>
     <Route exact path="/ricerca" component={Ricerca}/>
     <Route exact path="/lineeguida" component={LineeGuida}/>
+    <Route exact path="/admin/aggiungistruttura" component={AggiungiStruttura}/>
     <Route component={Error}/>
     </Switch>
 
