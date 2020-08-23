@@ -107,6 +107,11 @@ class FormRegistrazioneUtente extends Component{
           url: "http://localhost:8080/all/registrazione",
           data: utente
         })
+        .then(res => {
+          console.log(res);
+          console.log(res.data);
+    
+        })
 
 
         
@@ -117,7 +122,7 @@ class FormRegistrazioneUtente extends Component{
 render(){
 
     return (
-        <MDBContainer>
+        <MDBContainer size="lg" >
           <MDBRow>
             <MDBCol md='8'>
               <MDBCard
