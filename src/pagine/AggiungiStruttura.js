@@ -53,7 +53,7 @@ export default function AggiungiStruttura() {
 
         headers:{
           'Authorization':"Basic YWRtaW46YWRtaW4=",
-          //'Access-Control-Allow-Origin': "http://localhost:3000"
+
 
         }
       }

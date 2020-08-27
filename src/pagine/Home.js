@@ -1,10 +1,136 @@
-import React from 'react'
+import React,{useEffect,useState } from 'react'
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import BannerStruttura from '../components/BannerStruttura';
+import axios from 'axios';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      '& > *': {
+        margin: theme.spacing(10),
+        width: theme.spacing(25),
+        height: theme.spacing(25),
+      },
+    },
+  }));
 
 export default function Home() {
+    const classes = useStyles();
+
+    const [struttureRigaSuperiore, setStruttureRigaSuperiore] = useState(null);
+    const [struttureRigaInferiore, setStruttureRigaInferiore] = useState(null);
+    const categorie = [
+      {id: 1, label:"Hotel",value:"hotel"},
+      {id: 2, label:"Museo",value:"museo"},
+      {id: 3, label:"Discoteca",value:"discoteca"},
+      {id: 4, label:"B&B",value:"badandbreakfast"}   , 
+      {id: 5, label:"Tour",value:"tour"},
+      {id: 6, label:"Ristorante",value:"ristorante"},
+      {id: 7, label:"Negozio",value:"negozio"},
+      {id: 8, label:"Palestra",value:"palestra"}  ,
+      {id: 9, label:"Parco Tematico",value:"parcotematico"} ,
+      {id: 10, label:"Agriturismo",value:"agriturismo"},
+      {id: 11, label:"Bar",value:"bar"} ,
+      {id: 12, label:"Piazza",value:"piazza"}    ,
+      {id: 13, label:"Spiaggia",value:"spiaggia"},
+      {id: 14, label:"Riserva Naturale",value:"riservanaturale"},
+      {id: 15, label:"Borgo",value:"borgo"},
+      {id: 16, label:"Luogo di Culto",value:"luogodiculto"}  ,
+      {id: 17, label:"Lago",value:"lago"} ,
+      {id: 18, label:"Parco Naturale",value:"parconaturale"},
+      {id: 19, label:"Monumento Storico",value:"monumentostorico"},
+      {id: 20, label:"Stazione Ferroviaria",value:"stazioneferroviaria" } ,                                                
+    ];
+
+    const recuperaRigaStrutture= (categoria) =>{
+
+      
+     const request =  axios.post(`http://localhost:8080/all/ricerca`,{       
+        nome:null,
+        city:null,
+        categoria:"hotel",  
+        latitudine:-1,
+        longitudine:-1,
+        distanza:-1,
+        prezzo:-1, 
+      })
+      .then(response =>{
+        
+        
+        setStruttureRigaSuperiore (response.data)
+  
+        
+        
+      })
+      .catch(error =>{
+        console.log(error)
+      })
+
+
+
+      
+
+
+  
+
+
+    }
+
+
+    useEffect(() => {
+
+      const categoriaRandomRigaSuperiore = categorie[Math.floor(Math.random() * categorie.length)];
+
+      const temp =  recuperaRigaStrutture("hotel"); 
+
+
+ 
+      const categoriaRandomInferiore = categorie[Math.floor(Math.random() * categorie.length)];
+
+      
+      setStruttureRigaInferiore( recuperaRigaStrutture("hotel") );
+
+
+      
+    },[]);
+
+
+
+
 
     return(
 
-        <div> <h2> Ciao sono la Home</h2></div>
+      <div>
+
+        
+
+        <div className={classes.root}> 
+            <Paper elevation={15}> <BannerStruttura struttura={struttureRigaSuperiore} /></Paper>
+            <Paper elevation={15}/>
+            <Paper elevation={15}/>          
+            <Paper elevation={15}/>          
+            <Paper elevation={15}/>
+        </div>          
+
+          <div className={classes.root}> 
+            <Paper elevation={15}> <BannerStruttura id="1234" nome="Salaza" immagine="https://www.touringclub.it/sites/default/files/styles/gallery_full/public/immagini_georiferite/domus_de_maria_localita_chia_0.jpg?itok=ubs7cEeP" rating={3}/></Paper>
+            <Paper elevation={15}/>
+            <Paper elevation={15}/>          
+            <Paper elevation={15}/>          
+            <Paper elevation={15}/>
+        </div>  
+
+        </div>
+
+
+
+
+            
+
+            
+       
     )
 
 }

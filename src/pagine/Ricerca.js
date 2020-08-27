@@ -1,10 +1,45 @@
 import React from 'react'
 
-export default function Ricerca() {
+class Ricerca extends React.Component {
 
-    return(
+    constructor(props) {
+        super(props);
+        this.state = {
+            open:false,
+            strutture: this.props.strutture
+        }
 
-        <div> <h2> Ciao sono la Ricerca</h2></div>
-    )
+    }
+
+    render(){
+
+
+
+        console.log(this.props)
+
+
+        /*const listaStrutture = this.state.strutture.map((struttura) =>
+        
+           <ul>{struttura}</ul>
+        
+        );*/
+
+        return(
+
+            <div>
+                Strutture
+                <ul>
+                   
+                   
+                    
+                </ul>
+            </div>
+
+
+        );
+    }
+
 
 }
+
+export default Ricerca

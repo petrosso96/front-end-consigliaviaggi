@@ -46,7 +46,7 @@ export default function MenùNavBar() {
         }}
       >
         
-          <Link to="/"><MenuItem key={"Login"} onClick={handleClose}>
+          <Link to="/login"><MenuItem key={"Login"} onClick={handleClose}>
             Login
           </MenuItem>
           </Link>

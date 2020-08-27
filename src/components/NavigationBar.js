@@ -9,7 +9,12 @@ import FiltriPopUp from './FiltriPopUp'
 import logo from '../images/Logo.svg';
 import MenuNavBar from './MenùNavBar';
 
+
 import axios from 'axios';
+import { Container } from '@material-ui/core';
+import Ricerca from '../pagine/Ricerca'
+import { Redirect } from 'react-router-dom';
+
 
 
 
@@ -79,10 +84,12 @@ const useStyles = makeStyles((theme) => ({
 ));
 
 export default function NavigationBar() {
-  const [ricerca, setFieldRicerca] = React.useState('');
+  const [isSearching, setIsSearching] = React.useState(false);
+  const [ricerca, setFieldRicerca] = React.useState(null);
   const [nomeCity, setCity] = React.useState(null);
   const [prezzoStruttura, setPrezzo] = React.useState(-1);
   const [nomeCategoria, setCategoria] = React.useState(null);
+  var risultatiRicerca = null;
   const classes = useStyles();
   const menuIcon = <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M2 13.5h14V12H2v1.5zm0-4h14V8H2v1.5zM2 4v1.5h14V4H2z"/></svg>
 
@@ -94,6 +101,7 @@ export default function NavigationBar() {
 
   const ricercaStrutture = (nomeStruttura) => {
 
+    setIsSearching(true);
 
 
     axios.post(`http://localhost:8080/all/ricerca`, {       
@@ -107,7 +115,9 @@ export default function NavigationBar() {
     })
     .then(res => {
       console.log(res);
-      console.log(res.data);
+      //console.log(res.data);
+      risultatiRicerca = res.data;
+
 
       
     })
@@ -142,8 +152,10 @@ export default function NavigationBar() {
 
   const clearField = () =>{ setFieldRicerca("") }
 
+  if( isSearching === false) {
+
   return (
-    <div className="NavigationBar">
+    <nav className="NavigationBar">
       <AppBar position="static" color="inherit">
         <Toolbar >
         <img src={logo} alt="Consiglia viaggi" className={classes.logo}></img>
@@ -170,13 +182,33 @@ export default function NavigationBar() {
             />
             <FiltriPopUp handleCityChange={handleCityChangeNavigationBar} handlePrezzoChange={handlePrezzoChangeNavigationBar} handleCategoriaChange={handleCategoriaChangeNavigationBar}></FiltriPopUp>
             
+            </div>
             <MenuNavBar />
             
            
-          </div>
+          
 
         </Toolbar> 
       </AppBar>
-    </div>
+
+      {isSearching && (
+      <Container>
+        <Ricerca></Ricerca>
+      </Container>
+      )
+    }
+
+
+
+    </nav>
+
+
+  
+
   );
+
+  }
+
+
+
 }
