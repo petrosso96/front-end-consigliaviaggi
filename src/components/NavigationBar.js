@@ -13,7 +13,6 @@ import MenuNavBar from './MenùNavBar';
 import axios from 'axios';
 import { Container } from '@material-ui/core';
 import Ricerca from '../pagine/Ricerca'
-import { Redirect } from 'react-router-dom';
 
 
 
@@ -83,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
 }
 ));
 
-export default function NavigationBar() {
+export default function NavigationBar(props) {
   const [isSearching, setIsSearching] = React.useState(false);
   const [ricerca, setFieldRicerca] = React.useState(null);
   const [nomeCity, setCity] = React.useState(null);

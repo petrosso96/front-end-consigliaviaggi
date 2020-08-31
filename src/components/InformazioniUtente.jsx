@@ -7,7 +7,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import DatePicker from 'react-date-picker';
-import Container from '@material-ui/core/Container'
 
 
 
@@ -36,9 +35,7 @@ import Container from '@material-ui/core/Container'
 
 function InformazioniUtente(props) {
     const classes = useStyles();
-    const classes2 = useStyles2();
     const url ="http://localhost:8080/user/"+"sasi43"//props.nomeUtente 
-    const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
     const [dataDaVisualizzare, setDataDaVisualizzare] = React.useState("")
 
 
@@ -281,7 +278,7 @@ function InformazioniUtente(props) {
     const getStringFromDate = (data) => {
 
         var anno = data.slice(0,4)
-        var mese = data. slice(5,7)
+        var mese = data.slice(5,7)
         var giorno = data.slice (8,10)
 
 
