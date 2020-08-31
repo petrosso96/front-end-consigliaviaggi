@@ -9,9 +9,8 @@ import Ricerca from './pagine/Ricerca';
 import LineeGuida from './components/LineeGuida'
 import AggiungiStruttura from './pagine/AggiungiStruttura';
 import { LoginPage } from './components/LoginPage';
-import PrivateRoute from './components/PrivateRoute'
-import NavBArProva from './components/NavBArProva';
 import InformazioniUtente from './components/InformazioniUtente';
+import { PrivateRoute } from './components/PrivateRoute';
 
 function App() {
   return (
@@ -20,13 +19,17 @@ function App() {
     <Switch >
     
     <Route exact path="/struttura" component={Struttura}/>
-    <Route path="/user/utente" component={InformazioniUtente}/>
+    
+    
 
     <Route exact path="/registrazione" component={FormRegistrazioneUtente}/>
     <Route exact path="/ricerca" component={Ricerca}/>
     <Route exact path="/lineeguida" component={LineeGuida}/>
     <Route exact path="/login" component={LoginPage}/>
-    <Route exact path="/admin/aggiungistruttura" component={AggiungiStruttura}></Route>
+
+    <PrivateRoute exact path="/user/home" component={Home}></PrivateRoute>
+    <PrivateRoute exact path="/user/informazioniUtente" component={InformazioniUtente}></PrivateRoute>
+    <PrivateRoute exact path="/admin/aggiungistruttura" component={AggiungiStruttura}></PrivateRoute>
     <Route  path="/" component={Home}/>
     
     </Switch>
