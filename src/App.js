@@ -20,12 +20,12 @@ function App() {
     
     <Route exact path="/struttura" component={Struttura}/>
     
-    
 
     <Route exact path="/registrazione" component={FormRegistrazioneUtente}/>
     <Route exact path="/ricerca" component={Ricerca}/>
     <Route exact path="/lineeguida" component={LineeGuida}/>
     <Route exact path="/login" component={LoginPage}/>
+    <Route exact path="/struttura/:id" children={<Struttura></Struttura>}/>
 
     <PrivateRoute exact path="/user/home" component={Home}></PrivateRoute>
     <PrivateRoute exact path="/user/informazioniUtente" component={InformazioniUtente}></PrivateRoute>

@@ -34,19 +34,25 @@ import DatePicker from 'react-date-picker';
 
 
 function InformazioniUtente(props) {
-    const classes = useStyles();
-    const url ="http://localhost:8080/user/"+"sasi43"//props.nomeUtente 
+    const classes = useStyles();    
     const [dataDaVisualizzare, setDataDaVisualizzare] = React.useState("")
+    const utente = JSON.parse(sessionStorage.getItem('user'));
+
 
 
     const [nome, setNome] = useState("")
     const [cognome, setCognome] = useState("")
-    const [nomeUtente, setNomeUtente] = useState("")
+    const [nomeUtente, setNomeUtente] = useState(utente.username);
     const [email, setEmail] = useState("")
     const [sesso, setSesso] = useState("")
     const [dataDiNascita, setDataDiNascita] = useState(null)
-    const [password, setPassword] = useState("")
+    const [password, setPassword] = useState(utente.password);
     const [mostraCome, setMostraCome] = useState("")
+
+    const autenticazione = "Basic "+window.btoa(nomeUtente+':'+password);
+    const prefissoUrl ="http://localhost:8080/user/";
+    const url = prefissoUrl.concat(nomeUtente)
+
 
 
     const [nomeDaModificare,setNomeDaModificare] = useState(false)
@@ -129,7 +135,7 @@ function InformazioniUtente(props) {
 
             axios.put(urlAPI, fieldNome,{ headers:{
                 "Content-type": "application/json",
-                'Authorization':'Basic c2FzaTQzOkFiYzEyMzQ1NkA='
+                'Authorization':autenticazione
             }})
             .then(response => {
 
@@ -151,7 +157,7 @@ function InformazioniUtente(props) {
 
         axios.put(urlAPI, fieldCognome,{ headers:{
             "Content-type": "application/json",
-            'Authorization':'Basic c2FzaTQzOkFiYzEyMzQ1NkA='
+            'Authorization':autenticazione
         }})
         .then(response => {
 
@@ -173,7 +179,7 @@ function InformazioniUtente(props) {
 
         axios.put(urlAPI, fieldEmail,{ headers:{
             "Content-type": "application/json",
-            'Authorization':'Basic c2FzaTQzOkFiYzEyMzQ1NkA='
+            'Authorization':autenticazione
         }})
         .then(response => {
 
@@ -194,7 +200,7 @@ function InformazioniUtente(props) {
 
         axios.put(urlAPI, body,{ headers:{
             "Content-type": "application/json",
-            'Authorization':'Basic c2FzaTQzOkFiYzEyMzQ1NkA='
+            'Authorization':autenticazione
         }})
         .then(response => {
 
@@ -216,7 +222,7 @@ function InformazioniUtente(props) {
 
         axios.put(urlAPI, dataDiNascita,{ headers:{
             "Content-type": "application/json",
-            'Authorization':'Basic c2FzaTQzOkFiYzEyMzQ1NkA='
+            'Authorization':autenticazione
         }})
         .then(response => {
 
@@ -255,7 +261,7 @@ function InformazioniUtente(props) {
 
         axios.put(urlAPI, fieldPassword,{ headers:{
             "Content-type": "application/json",
-            'Authorization':'Basic c2FzaTQzOkFiYzEyMzQ1NkA='
+            'Authorization':autenticazione
         }})
         .then(response => {
 
@@ -298,7 +304,7 @@ function InformazioniUtente(props) {
 
         axios.put(urlAPI, body,{ headers:{
             "Content-type": "application/json",
-            'Authorization':'Basic c2FzaTQzOkFiYzEyMzQ1NkA='
+            'Authorization':autenticazione
         }})
         .then(response => {
 
@@ -311,27 +317,27 @@ function InformazioniUtente(props) {
 
 
 
-    const recuperaInformazioniUtente =  (nomeUtente) => {
+    const recuperaInformazioniUtente =  () => {
+
+        console.log(url)
+
+        
 
         axios.get(url,{
             headers:{
-                'Authorization':'Basic c2FzaTQzOkFiYzEyMzQ1NkA='
+                'Authorization':autenticazione
             }
         })
         .then( response => {
 
            setNome(response.data.nome);
            setCognome(response.data.cognome);
-           setNomeUtente(response.data.nomeUtente)
            setEmail(response.data.indirizzoEmail);
            setSesso(response.data.sesso);
-           //setPassword("")
            setMostraCome(response.data.mostraCome);
            setDataDiNascita(response.data.dataDiNascita);
            var stringaData = getStringFromDate(response.data.dataDiNascita)
            setDataDaVisualizzare( stringaData )
-
-           console.log(dataDaVisualizzare)
 
         }
 
@@ -340,20 +346,14 @@ function InformazioniUtente(props) {
 
     }
 
-    useEffect( ()=> {
-
-        //const nomeUtente = props.nomeUtente;
-        const nomeUtente = "sasi43"
-        
-        recuperaInformazioniUtente(nomeUtente);
-
-
-        
+    useEffect( ()=> { recuperaInformazioniUtente();
     }, [] )
 
 
 
 if(nome !== null && dataDiNascita !== null){
+
+
 
     return (
         
@@ -492,6 +492,7 @@ if(nome !== null && dataDiNascita !== null){
 
 }
 else{
+
 
     return (
 

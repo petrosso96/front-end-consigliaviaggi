@@ -24,8 +24,9 @@ function login(username, password) {
             if (user) {
                 // store user details and basic auth credentials in local storage 
                 // to keep user logged in between page refreshes
-                user.authdata = window.btoa(username + ':' + password);
-                sessionStorage.setItem('user', JSON.stringify(user));
+                user.authdata = autenticazioneInBase64;
+
+                sessionStorage.setItem('user',JSON.stringify(user));
             }
 
             return user;
@@ -35,6 +36,8 @@ function login(username, password) {
 function logout() {
     // remove user from local storage to log user out
     sessionStorage.removeItem('user');
+
+
 }
 
 

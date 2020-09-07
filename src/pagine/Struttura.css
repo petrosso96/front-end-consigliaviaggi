@@ -1,0 +1,39 @@
+.struttura__header{
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    align-content: space-between;
+    padding: 0,5% 0% 0% 0%;
+    
+}
+
+.struttura__ratingStruttura{
+    padding: 0% 0% 0% 1%;
+}
+
+.struttura__prezzoStruttura{
+    padding: 0% 0% 0% 1%;
+}
+
+
+.struttura__headerElencoRecensioni{
+    display: inline-flex;
+    
+}
+
+.struttura__elencoRecensioni{
+
+    position: relative;
+    
+    left: 25%;
+    
+}
+
+.struttura__recensione{
+
+    display: flex;
+}
+
+.struttura__ratingRecensione{
+    padding: 0% 0% 1% 5%;
+}

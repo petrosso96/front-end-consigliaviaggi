@@ -1,28 +1,23 @@
 import React from 'react'
 import './BannerStruttura.css'
-import StarRatings from 'react-star-ratings'
+import EuroSymbolIcon from '@material-ui/icons/EuroSymbol';
 
-function BannerStruttura(strutture) {
+function BannerStruttura(props) {
+
+    
+
     return (
         <div className="struttura">
-            <p>{"nome"}</p>
-            <p className="struttura__">
-                
-            </p>
+            <h3>{props.struttura.nome}</h3>
+
 
             <img source={"immagine"} alt="foto"></img>
             <div className="struttura__rating">
-                {
-                    <StarRatings
-                    numberOfStars={3}
-                    name='rating'
-                    rating = {3}
-                    starRatedColor= "red"
-                    starDimension="20px"
-                  />
-                }
+                
 
-                {console.log(strutture[0])}
+                
+
+               
                 
             </div>
     
