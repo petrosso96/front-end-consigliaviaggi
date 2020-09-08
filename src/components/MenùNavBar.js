@@ -14,7 +14,10 @@ const ITEM_HEIGHT = 48;
 export default function MenùNavBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [user, setUser] = React.useState(sessionStorage.getItem('user'));
-  const [isLogged, setIsLogged] = React.useState(false)
+  const [admin, setAdmin] = React.useState(sessionStorage.getItem('admin'));
+  const [isLoggedUtente, setIsLoggedUtente] = React.useState(false)
+  const [isLoggedAdmin, setIsLoggedAdmin] = React.useState(false)
+
 
   const open = Boolean(anchorEl);
 
@@ -34,20 +37,37 @@ export default function MenùNavBar() {
     
   }
 
+  const handleCloseLogOutAdmin = () =>{
+
+    setAnchorEl(null);
+    userService.logoutAdmin();
+
+  }
+
   useEffect( ()=> {
 
 
     if(sessionStorage.getItem('user') !== null){
 
-      setIsLogged(true)
+      setIsLoggedUtente(true)
 
     }
     else{
 
-      setIsLogged(false)
+      setIsLoggedUtente(false)
     }
+
     
-  }, user )
+    if(sessionStorage.getItem('admin') !== null){
+
+      setIsLoggedAdmin(true)
+
+    }
+    else{
+
+      setIsLoggedAdmin(false)
+    }
+  }, user,admin )
 
 
 
@@ -55,7 +75,7 @@ export default function MenùNavBar() {
 
 
 
-  if(isLogged){
+  if(isLoggedUtente){
     return (
       <div >
         <IconButton
@@ -101,6 +121,44 @@ export default function MenùNavBar() {
 
 
 
+
+  }
+  else if(isLoggedAdmin){
+ 
+    return (
+      <div >
+        <IconButton
+          aria-label="more"
+          aria-controls="long-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+        >
+          <MoreVertIcon />
+        </IconButton>
+        <Menu
+          id="long-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={open}
+          onClose={handleClose}
+          PaperProps={{
+            style: {
+              maxHeight: ITEM_HEIGHT * 4.5,
+              width: '20ch',
+            },
+          }}
+        >
+            <Link to="/lineeguida"><MenuItem key={"Lineeguida"} onClick={handleClose}>
+              Linee Guida
+            </MenuItem>
+            </Link>
+            <Link to="/"><MenuItem key={"LogOutAdmin"} onClick={handleCloseLogOutAdmin}>
+              Log out
+            </MenuItem>
+            </Link>
+        </Menu>
+      </div>
+    );
 
   }
   else{

@@ -1,7 +1,9 @@
 import React from 'react';
 
 import { userService } from '../servizi/user.service';
-import { Container } from '@material-ui/core';
+import { Container, Checkbox } from '@material-ui/core';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -14,7 +16,8 @@ class LoginPage extends React.Component {
             password: '',
             submitted: false,
             loading: false,
-            error: ''
+            error: '',
+            isAdmin:false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -38,6 +41,19 @@ class LoginPage extends React.Component {
         }
 
         this.setState({ loading: true });
+
+        if(this.state.isAdmin){
+            userService.loginAdmin(username,password)
+            .then(
+                admin =>{
+                    const { from } = this.props.location.state || { from: { pathname: "/admin/home" } };
+                    this.props.history.push(from);
+
+                },
+                error => this.setState({ error, loading: false })
+            );
+        }
+        else{
         userService.login(username, password)
             .then(
                 user => {
@@ -46,6 +62,7 @@ class LoginPage extends React.Component {
                 },
                 error => this.setState({ error, loading: false })
             );
+        }
     }
 
     render() {
@@ -68,6 +85,14 @@ class LoginPage extends React.Component {
                         {submitted && !password &&
                             <div className="help-block">E'necessaria la password</div>
                         }
+                        <FormControlLabel
+                        control={<Checkbox
+                         checked={this.state.isAdmin}
+                         onChange={(e)=>{this.setState({isAdmin:!this.state.isAdmin})}}
+                         name="CheckAdmin"
+                        />}
+                        label="Sono un Admin"
+                        />
                     </div>
                     <div className="form-group">
                         <button className="btn btn-primary" disabled={loading}>Login</button>

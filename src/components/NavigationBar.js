@@ -8,6 +8,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import FiltriPopUp from './FiltriPopUp'
 import logo from '../images/Logo.svg';
 import MenuNavBar from './MenùNavBar';
+import {useLocation} from "react-router-dom";
 
 
 import axios from 'axios';
@@ -88,8 +89,11 @@ export default function NavigationBar(props) {
   const [nomeCity, setCity] = React.useState(null);
   const [prezzoStruttura, setPrezzo] = React.useState(-1);
   const [nomeCategoria, setCategoria] = React.useState(null);
+  const [isAdmin,setIsAdmin] = React.useState(false);
   var risultatiRicerca = null;
   const classes = useStyles();
+  let location = useLocation();
+  console.log(location.pathname)
 
 
   const handleChange = (event) => {

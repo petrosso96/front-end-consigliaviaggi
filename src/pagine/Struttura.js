@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import StarsIcon from '@material-ui/icons/Stars';
 
 
 
@@ -142,13 +143,13 @@ export default function Struttura() {
              labelId="demo-simple-select-label"
              id="demo-simple-select"
              value={ordineRecensioni}
-             onChange={(e)=>{setOrdineRecensioni(e.target.value)}}
+             onChange={(e)=>{setOrdineRecensioni(e.target.value);recuperaRecensioniStruttura(e.target.value)}}
             >
 
           <MenuItem value={"recenti"}>Più Recenti</MenuItem>
           <MenuItem value={"menorecenti"}>Meno Recenti</MenuItem>
-          <MenuItem value={"positive"}>Migliori</MenuItem>
-          <MenuItem value={"negative"}>Peggiori</MenuItem>
+          <MenuItem value={"positive"}>Positive</MenuItem>
+          <MenuItem value={"negative"}>Negative</MenuItem>
             </Select>
             </FormControl>
             </div>
@@ -178,12 +179,12 @@ function Recensione(props){
     const [isDisableDislikeButton,setIsDisableDislikeButton] = useState(true)
     const [numeroLike,setNumeroLike] = useState(props.value.likes);
     const [numeroDislike,setNumeroDislike] = useState(props.value.dislikes);
+    const [rankingUtente,setRankingUtente] = useState(props.value.autore.rank)
 
     const recensioneID = props.value.id;
-    const utente = JSON.parse(sessionStorage.getItem('user'));
+    var utente;
 
-    const autenticazione = "Basic "+window.btoa(utente.username+':'+utente.password);
-    console.log(autenticazione)
+    var autenticazione ;
     
 
     const aggiungiLike = (id) => {
@@ -261,12 +262,15 @@ function Recensione(props){
 
         if(JSON.parse(sessionStorage.getItem('user') )!= null){
 
-            setIsDisableLikeButton(false)
-            setIsDisableDislikeButton(false)
+            setIsDisableLikeButton(false);
+            setIsDisableDislikeButton(false);
+            utente = JSON.parse(sessionStorage.getItem('user'));
+            autenticazione = "Basic "+window.btoa(utente.username+':'+utente.password);
 
         }
         else{
-            
+           
+
             setIsDisableLikeButton(true)
             setIsDisableDislikeButton(true)
 
@@ -280,7 +284,7 @@ function Recensione(props){
     return(
         <div>
         <div className="struttura__recensione">
-            <h4>{nomeAutore}</h4>
+            <h4>{nomeAutore}  {rankingUtente}   <StarsIcon/></h4> 
             <Rating name="voti-recensione"  value={props.value.voto} size="small" readOnly className="struttura__ratingRecensione"/>
 
 
@@ -289,6 +293,7 @@ function Recensione(props){
         <h5> <IconButton disabled={isDisableLikeButton} onClick={() =>{aggiungiLike(recensioneID)}} > <ThumbUpAltIcon/></IconButton> : {numeroLike}   
              <IconButton disabled={isDisableDislikeButton} onClick={()=>{aggiungiDislike(recensioneID)}} ><ThumbDownIcon/></IconButton>: {numeroDislike}
         </h5>
+        <br/>
         
         </div>
         
