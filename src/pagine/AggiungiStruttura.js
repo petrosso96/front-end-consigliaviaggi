@@ -7,54 +7,39 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 import TextField from '@material-ui/core/TextField';
-import FileUploader from '../components/FileUploader';
 import Button from '@material-ui/core/Button'
 import axios from 'axios';
+import {  openUploadWidget } from "../servizi/cloudinaryService.js";
+
 
 
 
 
 
 export default function AggiungiStruttura() {
-
     const [categoriaStruttura, setCategoria] = React.useState('');
     const [prezzoStruttura, setPrezzo] = React.useState(0);
     const [nomeStruttura, setNome] = React.useState('');
     const [descrizioneStruttura, setDescrizione] = React.useState('');
-    const [immagine, setImmagine] = React.useState(null);
-    let indirizzoStruttura = {
-      via: "",
-      civico:-1,
-      città: ""
-    }
+    const [images, setImages] = React.useState('');
+    const [viaIndirizzo , setVia] = React.useState('');
+    const [civicoIndirizzo, setCivico]= React.useState(-1)
+    const [cityIndirizzo,setCity]= React.useState('');
+
+    
     const [isSelectedAttività, setIsSelectedAttività] = React.useState(false);
 
     const handleAggiungiStruttura = () => {
 
-      const FormStruttura = {
-        
-        nome: nomeStruttura,
-        descrizione:descrizioneStruttura,
-        indirizzo:{
-           via:indirizzoStruttura.via,
-           civico:indirizzoStruttura.civico,
-           city:indirizzoStruttura.città
-           },
-        categoria:categoriaStruttura,
-        prezzo:prezzoStruttura,
-        foto:immagine
+      const admin = JSON.parse(sessionStorage.getItem("admin"));
+      const authentication = "Basic "+admin.authdata
+      
 
-
-      }
-
-      console.log(FormStruttura)
 
       const axiosConfig = {
 
         headers:{
-          'Authorization':"Basic YWRtaW46YWRtaW4=",
-
-
+          'Authorization':authentication,
         }
       }
 
@@ -63,45 +48,56 @@ export default function AggiungiStruttura() {
         nome: nomeStruttura,
         descrizione:descrizioneStruttura,
         indirizzo:{
-           via:indirizzoStruttura.via,
-           civico:indirizzoStruttura.civico,
-           city:indirizzoStruttura.città
+           via:viaIndirizzo,
+           civico:civicoIndirizzo,
+           city:cityIndirizzo
            },
         categoria:categoriaStruttura,
         prezzo:prezzoStruttura,
-        foto:immagine
+        foto:images
 
       }, axiosConfig)
       .then(res => {
         console.log(res);
         console.log(res.data);
+        alert("struttura aggiunta con successo")
   
       })
+
+      clearAllForm();
+
       
     }
 
-    const handleFileUploadAggiungiStruttura = (File) => {
+    const clearAllForm = () =>{
 
-      setImmagine(File);
-
+      setCategoria('');
+      setPrezzo(0);
+      setNome('');
+      setDescrizione('');
+      setImages('');
+      setVia('');
+      setCivico(-1);
+      setCity('');
+      setIsSelectedAttività(false)
 
     }
 
     const handleChangeVia = (e) =>{
 
-      indirizzoStruttura.via = e.target.value;
+      setVia( e.target.value);
       
 
     }
     const handleChangeCivico = (e) =>{
 
-      indirizzoStruttura.civico = e.target.valueAsNumber || e.target.value
+      setCivico( e.target.valueAsNumber || e.target.value);
       
 
     }
     const handleChangeCittà = (e) =>{
 
-      indirizzoStruttura.città = e.target.value;
+      setCity(e.target.value);
       
 
     }
@@ -128,9 +124,28 @@ export default function AggiungiStruttura() {
         }
         setCategoria(e.target.value)
     }
+    
+
+    const beginUpload = tag => {
+      const uploadOptions = {
+        cloudName: "sasi46",
+        tags: [tag],
+        uploadPreset: "vmsgdepy"
+      };
+    
+      openUploadWidget(uploadOptions, (error, photos) => {
+        if (!error) {
+          setImages(photos[0].url);
+          console.log("fatto")
+        } else {
+          console.log(error);
+        }
+      })
+    }
 
     return(
         <Container>
+          <br/>
         <div>
            <Container>
             <div>
@@ -188,7 +203,7 @@ export default function AggiungiStruttura() {
             <Container>
               <div>
                 <h3>Nome</h3>
-                <TextField id="standard-basic" label="Nome Struttura" onChange={handleChangeNome} />
+                <TextField id="standard-basic" value={nomeStruttura} label="Nome Struttura" onChange={handleChangeNome} />
               
               </div>
 
@@ -202,6 +217,7 @@ export default function AggiungiStruttura() {
                    id="standard-textarea"
                     label="Descrizione Struttura"
                     placeholder="Placeholder"
+                    value={descrizioneStruttura}
                     multiline
                     onChange= {handleChangeDescrizione}
                 />
@@ -209,21 +225,24 @@ export default function AggiungiStruttura() {
               </div>
 
             </Container>
-            <Container>
-              <div>
-                <FileUploader handleFileUpload = {handleFileUploadAggiungiStruttura}></FileUploader>
-              </div>
-            </Container>
+
 
             <Container>
               <div>
                 <h3>Indirizzo</h3>
 
-              <TextField id="via" label="Via" onChange={handleChangeVia}/>
-              <TextField id="civico" type='number' label="Civico" onChange={handleChangeCivico}/>
-              <TextField id="città" label="Città" onChange={handleChangeCittà}/>
+              <TextField id="via" value={viaIndirizzo} label="Via" onChange={handleChangeVia}/>
+              <TextField id="civico" value={civicoIndirizzo} type='number' label="Civico" onChange={handleChangeCivico}/>
+              <TextField id="città" value={cityIndirizzo} label="Città" onChange={handleChangeCittà}/>
 
               </div>
+            </Container>
+            <Container>
+              <br/>
+              <div>
+              <Button variant="contained" onClick={() => beginUpload()}>Carica Immagine</Button>
+              </div>
+              <br/>
             </Container>
 
             <Button variant="outlined" onClick={handleAggiungiStruttura}>
@@ -233,3 +252,4 @@ export default function AggiungiStruttura() {
         </Container>
     )
 }
+

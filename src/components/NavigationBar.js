@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -8,13 +8,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import FiltriPopUp from './FiltriPopUp'
 import logo from '../images/Logo.svg';
 import MenuNavBar from './MenùNavBar';
-import {useLocation} from "react-router-dom";
-
-
+import { useHistory } from "react-router-dom";
 import axios from 'axios';
-import { Container } from '@material-ui/core';
-import Ricerca from '../pagine/Ricerca'
-
+import Button from '@material-ui/core/Button';
+import './NavigationBar.css'
 
 
 
@@ -92,8 +89,18 @@ export default function NavigationBar(props) {
   const [isAdmin,setIsAdmin] = React.useState(false);
   var risultatiRicerca = null;
   const classes = useStyles();
-  let location = useLocation();
-  console.log(location.pathname)
+  const history = useHistory();
+
+  useEffect(()=>{
+
+    if(sessionStorage.getItem('admin') != null){
+      setIsAdmin(true)
+
+    }
+    else{
+      setIsAdmin(false)
+    }
+  },[isAdmin])
 
 
   const handleChange = (event) => {
@@ -117,10 +124,13 @@ export default function NavigationBar(props) {
     })
     .then(res => {
       console.log(res);
-      //console.log(res.data);
+
       risultatiRicerca = res.data;
-
-
+      
+      history.push({
+        pathname: '/ricerca',
+        state: { strutture: risultatiRicerca }
+    });
       
     })
     
@@ -154,13 +164,12 @@ export default function NavigationBar(props) {
 
   const clearField = () =>{ setFieldRicerca("") }
 
-  if( isSearching === false) {
 
   return (
     <nav className="NavigationBar">
       <AppBar position="static" color="inherit">
         <Toolbar >
-        <img src={logo} alt="Consiglia viaggi" className={classes.logo}></img>
+        <img onClick={()=>{history.push("/")}} src={logo} alt="Consiglia viaggi" className={classes.logo}  style={{cursor: "pointer"}}></img>
         <IconButton  className={classes.menuButton} color="inherit" aria-label="menu">
         </IconButton>
 
@@ -184,21 +193,22 @@ export default function NavigationBar(props) {
             />
             <FiltriPopUp handleCityChange={handleCityChangeNavigationBar} handlePrezzoChange={handlePrezzoChangeNavigationBar} handleCategoriaChange={handleCategoriaChangeNavigationBar}></FiltriPopUp>
             
+            
             </div>
-            <MenuNavBar />
+
+            <div className="BottoneAggiungiStruttura" >
+               {isAdmin&&(<Button onClick={()=>{history.push("/admin/aggiungistruttura")}} variant="contained" >Aggiungi Struttura</Button>)}
+              </div>
+            
+            
             
            
-          
-
+             <div className="MenuNavigationBar" ><MenuNavBar/></div>
+            
         </Toolbar> 
       </AppBar>
 
-      {isSearching && (
-      <Container>
-        <Ricerca></Ricerca>
-      </Container>
-      )
-    }
+
 
 
 
@@ -209,7 +219,7 @@ export default function NavigationBar(props) {
 
   );
 
-  }
+  
 
 
 

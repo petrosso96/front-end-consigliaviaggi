@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import axios from 'axios'
-import './InformazioniUtente'
+import './InformazioniUtente.css'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -356,7 +356,6 @@ if(nome !== null && dataDiNascita !== null){
 
 
     return (
-        
         <div className="infUtente__root">
 
             <h1>INFORMAZIONI PERSONALI</h1>
@@ -370,6 +369,7 @@ if(nome !== null && dataDiNascita !== null){
                 {!nomeDaModificare &&(nome)}
                 
             </div>
+            <br/>
 
             <div className="infUtente__cognome">
                 Cognome           {!cognomeDaModificare && (<Button size="small" className={classes.margin} onClick={() =>{setCognomeDaModificare(true)}}> Modifica </Button>)}{cognomeDaModificare && (<> <Button size="small" className={classes.margin} onClick={modificaCognome}> Salva </Button>  <Button size="small" className={classes.margin} onClick={clearFieldCognome}> Annulla </Button>  </> ) }                                                    
@@ -381,12 +381,15 @@ if(nome !== null && dataDiNascita !== null){
                 
             </div>
 
+            <br/>
+
             <div className="infUtente__nomeUtente">
                 Nome Utente                                                     
                 <br/> 
                 {nomeUtente}
                 
             </div>
+            <br/>
 
 
             <div className="infUtente__email">
@@ -398,6 +401,7 @@ if(nome !== null && dataDiNascita !== null){
                 {!emailDaModificare &&(email)}
                 
             </div>
+            <br/>
 
 
             <div className="infUtente__sesso">
@@ -424,6 +428,7 @@ if(nome !== null && dataDiNascita !== null){
                 {!sessoDaModificare &&(sesso)}
                 
             </div>
+            <br/>
 
             <div className="infUtente__data">
                 Data di Nascita           {!dataDaModificare && (<Button size="small" className={classes.margin} onClick={() =>{setDataDaModificare(true)}}> Modifica </Button>)}{dataDaModificare && (<> <Button size="small" className={classes.margin} onClick={modificaData}> Salva </Button>  <Button size="small" className={classes.margin} onClick={clearFieldData}> Annulla </Button>  </> ) }                                                    
@@ -440,6 +445,7 @@ if(nome !== null && dataDiNascita !== null){
                 {!dataDaModificare &&(dataDaVisualizzare)}
                 
             </div>
+            <br/>
 
             <div className="infUtente__password">
                 Password           {!passwordDaModificare && (<Button size="small" className={classes.margin} onClick={() =>{setPasswordDaModificare(true)}}> Modifica </Button>)}{passwordDaModificare && (<> <Button size="small" className={classes.margin} onClick={modificaPassword}> Salva </Button>  <Button size="small" className={classes.margin} onClick={clearFieldPassword}> Annulla </Button>  </> ) }                                                    
@@ -454,6 +460,7 @@ if(nome !== null && dataDiNascita !== null){
                 {!passwordDaModificare &&("*************")}
                 
             </div>
+            <br/>
 
             <div className="infUtente__mostraCome">
                 Mostra Come           {!mostraComeDaModificare && (<Button size="small" className={classes.margin} onClick={() =>{setMostraComeDaModificare(true)}}> Modifica </Button>)}{mostraComeDaModificare && (<> <Button size="small" className={classes.margin} onClick={modificaMostraCome}> Salva </Button>  <Button size="small" className={classes.margin} onClick={clearMostraCome}> Annulla </Button>  </> ) }                                                    
