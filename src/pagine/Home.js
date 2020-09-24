@@ -5,6 +5,7 @@ import BannerStruttura from '../components/BannerStruttura';
 import axios from 'axios';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {Link} from 'react-router-dom';
+import './Home.css'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -48,13 +49,13 @@ export default function Home() {
       {id: 20, label:"Stazione Ferroviaria",value:"stazioneferroviaria" } ,                                                
     ];
 
-    const recuperaRigaStruttureSuperiore = (categoria) =>{
+    const recuperaRigaStruttureSuperiore = (categoriaStruttura) =>{
 
       
       axios.post(`http://localhost:8080/all/ricerca`,{       
         nome:null,
         city:null,
-        categoria:"hotel",  
+        categoria:categoriaStruttura,  
         latitudine:-1,
         longitudine:-1,
         distanza:-1,
@@ -74,13 +75,13 @@ export default function Home() {
     }
 
 
-    const recuperaRigaStruttureInferiore = (categoria) =>{
+    const recuperaRigaStruttureInferiore = (categoriaStruttura) =>{
 
       
       axios.post(`http://localhost:8080/all/ricerca`,{       
         nome:null,
         city:null,
-        categoria:"hotel",  
+        categoria:categoriaStruttura,  
         latitudine:-1,
         longitudine:-1,
         distanza:-1,
@@ -105,14 +106,14 @@ export default function Home() {
 
     
 
-      recuperaRigaStruttureSuperiore("hotel")    
+      recuperaRigaStruttureSuperiore("ristorante")    
 
 
  
       const categoriaRandomInferiore = categorie[Math.floor(Math.random() * categorie.length)];
 
       
-      recuperaRigaStruttureInferiore("hotel")
+      recuperaRigaStruttureInferiore("ristorante")
 
 
       
@@ -124,8 +125,9 @@ export default function Home() {
 
       
     return(
+      
 
-      <div>
+      
 
         
 
@@ -153,9 +155,12 @@ export default function Home() {
         </div>          
  
 
-      </div>
+      
 
        
+      
+
+
     )
 
       }else{
@@ -176,3 +181,4 @@ export default function Home() {
       }
 
 }
+

@@ -1,3 +1,5 @@
+
+
 .struttura__header{
     display: flex;
     justify-content: flex-start;
@@ -5,6 +7,10 @@
     align-content: space-between;
     padding: 0,5% 0% 0% 0%;
     
+}
+.struttura__centro{
+
+   padding: 0% 0% 0% 30%;
 }
 
 .struttura__ratingStruttura{
@@ -25,7 +31,8 @@
 
     position: relative;
     
-    left: 25%;
+    left: 130%;
+    bottom: 14%;
     
 }
 

@@ -129,6 +129,7 @@ class FiltriPopUp extends React.Component {
 
           <div >
           <div>
+            <br/>
             <TextField
               label="Città"
               id="outlined-margin-none"
@@ -138,6 +139,7 @@ class FiltriPopUp extends React.Component {
   
           <div/>
           <div>
+            <br/>
             <Select
               labelId="demo-controlled-open-select-label"
               id="demo-controlled-open-select"
@@ -148,7 +150,7 @@ class FiltriPopUp extends React.Component {
               onChange={this.setPrezzo}
              >
               <MenuItem value={-1}>
-                <em>None</em>
+                <em>Prezzo</em>
               </MenuItem>
               <MenuItem value={1} ><EuroSymbolIcon/></MenuItem>
               <MenuItem value={2} ><EuroSymbolIcon/><EuroSymbolIcon/></MenuItem>
@@ -158,14 +160,17 @@ class FiltriPopUp extends React.Component {
             </Select>
           </div>
           <div >
+            <br/>
             <ol className={FormFiltriStyle.categoria}>
               {
-                this.state.categoria.map((singolaCategoria) => {
-                  return (<Checkbox handleCheckChieldElement={this.handleCategoriaChecked}{...singolaCategoria} />)
+                this.state.categoria.map((singolaCategoria,indice) => {
+                  return (<Checkbox key={indice} handleCheckChieldElement={this.handleCategoriaChecked}{...singolaCategoria} />)
                 })
               }
             </ol>
           </div>
+
+          <Button variant="contained" onClick={this.closeModal}>Salva</Button>
           
           </div>
         </div>

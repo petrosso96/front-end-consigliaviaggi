@@ -1,5 +1,7 @@
 .infUtente__root{
+    position: relative;
 
+    left: 33%;
 }
 
 .infUtente__loading{

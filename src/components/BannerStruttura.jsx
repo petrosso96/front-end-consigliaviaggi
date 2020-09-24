@@ -1,8 +1,9 @@
 import React from 'react'
 import './BannerStruttura.css'
-import EuroSymbolIcon from '@material-ui/icons/EuroSymbol';
 
 function BannerStruttura(props) {
+
+    console.log(props.struttura.foto)
 
     
 
@@ -11,15 +12,8 @@ function BannerStruttura(props) {
             <h3>{props.struttura.nome}</h3>
 
 
-            <img source={"immagine"} alt="foto"></img>
-            <div className="struttura__rating">
-                
+            <img source={props.struttura.foto} alt="foto" style={{width: "40px;"}}></img>
 
-                
-
-               
-                
-            </div>
     
             
         </div>
