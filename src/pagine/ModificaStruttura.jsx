@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { useLocation } from "react-router-dom";
+import { useLocation,useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem'
@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function ModificaStruttura() {
+    let history = useHistory();
     const admin = JSON.parse(sessionStorage.getItem("admin"));
     const authentication = "Basic "+admin.authdata
     const classes = useStyles();  
@@ -40,11 +41,6 @@ function ModificaStruttura() {
     const [immagine,setImmagine] = useState('');
 
 
-
-    
-
-
-
     const [nomeDaModificare,setNomeDaModificare] = useState(false)
     const [descrizioneDaModificare,setDescrizioneDaModificare] = useState(false)
     const [indirizzoDaModificare,setIndirizzoDaModificare] = useState(false)
@@ -56,20 +52,6 @@ function ModificaStruttura() {
     const [fieldVia, setFieldVia] = useState("")
     const [fieldCivico, setFieldCivico] = useState("")
     const [fieldCity, setFieldCity] = useState("")
-
-
-
-
-
-
-
-    
-    
- 
-    
-    
-
-
 
     useEffect( ()=> { 
         console.log(location.state.struttura)
@@ -86,12 +68,12 @@ function ModificaStruttura() {
         location.state.struttura.categoria === "riservanaturale" || location.state.struttura.categoria === "borgo"||
         location.state.struttura.categoria === "luogodiculto" || location.state.struttura.categoria === "lago" ||
         location.state.struttura.categoria === "parconaturale" || location.state.struttura.categoria === "monumentostorico"||
-        location.state.struttura.categoria === "stazioneferroviaria"
-          ){
-              setIsSelectedAttività(false)
+        location.state.struttura.categoria === "stazioneferroviaria" ){
+
+            setIsSelectedAttività(false)
           }
           else{
-              setIsSelectedAttività(true)
+            setIsSelectedAttività(true)
           }
 
 
@@ -264,6 +246,26 @@ function ModificaStruttura() {
         
     }
 
+    const eliminaStruttura = () => {
+
+        const url = "http://localhost:8080/admin/struttura/"+location.state.struttura.id;
+
+
+        axios.delete(url,{headers:{            
+            "Content-type": "application/json",
+            'Authorization':authentication
+        }})
+        .then((response) => {
+
+            alert("Struttura eliminata con successo!");
+
+            history.push({
+                pathname:"/",
+                
+            })
+
+        })
+    }
 
 
 
@@ -378,6 +380,14 @@ function ModificaStruttura() {
 
                 )}
                 {!indirizzoDaModificare &&(<h5>{indirizzoStruttura.via} {indirizzoStruttura.civico}, {indirizzoStruttura.city}</h5>)}
+
+
+                <br/>
+            <br/>
+            <br/>
+
+            <Button  variant="contained" onClick={eliminaStruttura}>Elimina Struttura</Button>
+
 
 
      
