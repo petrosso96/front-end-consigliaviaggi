@@ -113,7 +113,7 @@ export default function NavigationBar(props) {
     setIsSearching(true);
 
 
-    axios.post(`http://localhost:8080/all/ricerca`, {       
+    axios.post(`https://consigliaviaggi.herokuapp.com/all/ricerca`, {       
       nome:ricerca,
       city:nomeCity,
       categoria:nomeCategoria,  

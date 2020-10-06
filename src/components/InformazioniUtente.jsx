@@ -50,7 +50,7 @@ function InformazioniUtente(props) {
     const [mostraCome, setMostraCome] = useState("")
 
     const autenticazione = "Basic "+window.btoa(nomeUtente+':'+password);
-    const prefissoUrl ="http://localhost:8080/user/";
+    const prefissoUrl ="https://consigliaviaggi.herokuapp.com/user/";
     const url = prefissoUrl.concat(nomeUtente)
 
 
@@ -130,7 +130,7 @@ function InformazioniUtente(props) {
 
             setNomeDaModificare(false)
 
-            const urlAPI = "http://localhost:8080/user/nome/"+nomeUtente
+            const urlAPI = "https://consigliaviaggi.herokuapp.com/user/nome/"+nomeUtente
             
 
             axios.put(urlAPI, fieldNome,{ headers:{
@@ -152,7 +152,7 @@ function InformazioniUtente(props) {
 
         setCognomeDaModificare(false)
 
-        const urlAPI = "http://localhost:8080/user/cognome/"+nomeUtente
+        const urlAPI = "https://consigliaviaggi.herokuapp.com/user/cognome/"+nomeUtente
         
 
         axios.put(urlAPI, fieldCognome,{ headers:{
@@ -174,7 +174,7 @@ function InformazioniUtente(props) {
 
         setEmailDaModificare(false)
 
-        const urlAPI = "http://localhost:8080/user/indirizzoEmail/"+nomeUtente
+        const urlAPI = "https://consigliaviaggi.herokuapp.com/user/indirizzoEmail/"+nomeUtente
         
 
         axios.put(urlAPI, fieldEmail,{ headers:{
@@ -194,7 +194,7 @@ function InformazioniUtente(props) {
 
         setSessoDaModificare(false)
 
-        const urlAPI = "http://localhost:8080/user/sesso/"+nomeUtente
+        const urlAPI = "https://consigliaviaggi.herokuapp.com/user/sesso/"+nomeUtente
         const body = JSON.stringify(sesso)
         
 
@@ -217,7 +217,7 @@ function InformazioniUtente(props) {
 
         setDataDaModificare(false)
 
-        const urlAPI = "http://localhost:8080/user/dataDiNascita/"+nomeUtente
+        const urlAPI = "https://consigliaviaggi.herokuapp.com/user/dataDiNascita/"+nomeUtente
         
 
         axios.put(urlAPI, dataDiNascita,{ headers:{
@@ -253,7 +253,7 @@ function InformazioniUtente(props) {
 
         setPasswordDaModificare(false)
 
-        const urlAPI = "http://localhost:8080/user/password/"+nomeUtente
+        const urlAPI = "https://consigliaviaggi.herokuapp.com/user/password/"+nomeUtente
 
 
         if( strcmp(fieldPassword,fieldConfermaPassword) === 0 ){
@@ -298,7 +298,7 @@ function InformazioniUtente(props) {
 
         setMostraComeDaModificare(false)
 
-        const urlAPI = "http://localhost:8080/user/mostraCome/"+nomeUtente
+        const urlAPI = "https://consigliaviaggi.herokuapp.com/user/mostraCome/"+nomeUtente
         const body = JSON.stringify(mostraCome)
         
 

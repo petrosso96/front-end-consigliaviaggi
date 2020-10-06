@@ -104,7 +104,7 @@ class FormRegistrazioneUtente extends Component{
   
         axios({
           method: "post",
-          url: "http://localhost:8080/all/registrazione",
+          url: "https://consigliaviaggi.herokuapp.com/all/registrazione",
           data: utente
         })
         .then(res => {

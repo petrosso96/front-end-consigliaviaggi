@@ -43,7 +43,7 @@ export default function AggiungiStruttura() {
         }
       }
 
-      axios.post(`http://localhost:8080/admin/aggiungistruttura`, {     
+      axios.post(`https://consigliaviaggi.herokuapp.com/admin/aggiungistruttura`, {     
 
         nome: nomeStruttura,
         descrizione:descrizioneStruttura,

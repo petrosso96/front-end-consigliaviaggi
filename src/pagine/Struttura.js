@@ -52,7 +52,7 @@ export default function Struttura() {
 
     const recuperaInfoStruttura = () =>{
 
-        const url = "http://localhost:8080/all/"+idStruttura.id;
+        const url = "https://consigliaviaggi.herokuapp.com/all/"+idStruttura.id;
         console.log(url)
 
         axios.get(url)
@@ -75,7 +75,7 @@ export default function Struttura() {
 
     const recuperaRecensioniStruttura = (ordine) => {
 
-        const url = "http://localhost:8080/all/"+idStruttura.id+"/"+ordine;
+        const url = "https://consigliaviaggi.herokuapp.com/all/"+idStruttura.id+"/"+ordine;
         console.log(url)
 
         axios.get(url)
@@ -237,7 +237,7 @@ function Recensione(props){
     const aggiungiLike = (id) => {
 
 
-        const url = "http://localhost:8080/user/"+id+"/addLike"
+        const url = "https://consigliaviaggi.herokuapp.com/user/"+id+"/addLike"
     
         axios.put(url,"",{
             headers:{
@@ -266,7 +266,7 @@ function Recensione(props){
 
     const aggiungiDislike = (id) =>{
 
-        const url = "http://localhost:8080/user/"+id+"/addDislike"
+        const url = "https://consigliaviaggi.herokuapp.com/user/"+id+"/addDislike"
     
         axios.put(url,"",{
             headers:{

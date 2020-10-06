@@ -100,7 +100,7 @@ function ModificaStruttura() {
 
     const modificaCategoria = () => {
 
-        const url = "http://localhost:8080/admin/struttura/categoria/"+location.state.struttura.id
+        const url = "https://consigliaviaggi.herokuapp.com/admin/struttura/categoria/"+location.state.struttura.id
         const body = JSON.stringify(categoriaStruttura)
         
 
@@ -138,7 +138,7 @@ function ModificaStruttura() {
 
         setNomeDaModificare(false)
 
-        const url = "http://localhost:8080/admin/struttura/nome/"+location.state.struttura.id
+        const url = "https://consigliaviaggi.herokuapp.com/admin/struttura/nome/"+location.state.struttura.id
 
  
         axios.put(url, fieldNome,{ headers:{
@@ -163,7 +163,7 @@ function ModificaStruttura() {
 
         setDescrizioneDaModificare(false)
 
-        const url = "http://localhost:8080/admin/struttura/descrizione/"+location.state.struttura.id
+        const url = "https://consigliaviaggi.herokuapp.com/admin/struttura/descrizione/"+location.state.struttura.id
 
  
         axios.put(url, fieldDescrizione,{ headers:{
@@ -185,7 +185,7 @@ function ModificaStruttura() {
 
     const modificaImmagine = () =>{
 
-        const url = "http://localhost:8080/admin/struttura/foto/"+location.state.struttura.id
+        const url = "https://consigliaviaggi.herokuapp.com/admin/struttura/foto/"+location.state.struttura.id
 
         axios.put(url, immagine,{ headers:{
             "Content-type": "application/json",
@@ -217,7 +217,7 @@ function ModificaStruttura() {
 
     const modificaIndirizzo = () => {
 
-        const url = "http://localhost:8080/admin/struttura/indirizzo/"+location.state.struttura.id
+        const url = "https://consigliaviaggi.herokuapp.com/admin/struttura/indirizzo/"+location.state.struttura.id
 
         const body = {
             via:fieldVia,
@@ -248,7 +248,7 @@ function ModificaStruttura() {
 
     const eliminaStruttura = () => {
 
-        const url = "http://localhost:8080/admin/struttura/"+location.state.struttura.id;
+        const url = "https://consigliaviaggi.herokuapp.com/admin/struttura/"+location.state.struttura.id;
 
 
         axios.delete(url,{headers:{            

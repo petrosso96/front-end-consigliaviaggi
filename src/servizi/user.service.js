@@ -17,7 +17,7 @@ function login(username, password) {
     var body = JSON.stringify({ username, password });
     
 
-    return axios.post(`http://localhost:8080/user/autenticazioneUtente`, body, { headers: { 
+    return axios.post(`https://consigliaviaggi.herokuapp.com/user/autenticazioneUtente`, body, { headers: { 
         'Content-Type': 'application/json',
         'Authorization': 'Basic '+autenticazioneInBase64}})
         .then(handleResponse)
@@ -43,7 +43,7 @@ function loginAdmin(username, password) {
     var body = JSON.stringify({ username, password });
     
 
-    return axios.post(`http://localhost:8080/admin/autenticazione`, body, { headers: { 
+    return axios.post(`https://consigliaviaggi.herokuapp.com/admin/autenticazione`, body, { headers: { 
         'Content-Type': 'application/json',
         'Authorization': 'Basic '+autenticazioneInBase64}})
         .then(handleResponse)

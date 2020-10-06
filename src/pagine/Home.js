@@ -52,7 +52,7 @@ export default function Home() {
     const recuperaRigaStruttureSuperiore = (categoriaStruttura) =>{
 
       
-      axios.post(`http://localhost:8080/all/ricerca`,{       
+      axios.post(`https://consigliaviaggi.herokuapp.com/all/ricerca`,{       
         nome:null,
         city:null,
         categoria:categoriaStruttura,  
@@ -78,7 +78,7 @@ export default function Home() {
     const recuperaRigaStruttureInferiore = (categoriaStruttura) =>{
 
       
-      axios.post(`http://localhost:8080/all/ricerca`,{       
+      axios.post(`https://consigliaviaggi.herokuapp.com/all/ricerca`,{       
         nome:null,
         city:null,
         categoria:categoriaStruttura,  
@@ -102,18 +102,12 @@ export default function Home() {
 
     useEffect(() => {
 
-      const categoriaRandomRigaSuperiore = categorie[Math.floor(Math.random() * categorie.length)];
 
-    
 
       recuperaRigaStruttureSuperiore("ristorante")    
 
-
- 
-      const categoriaRandomInferiore = categorie[Math.floor(Math.random() * categorie.length)];
-
       
-      recuperaRigaStruttureInferiore("ristorante")
+      recuperaRigaStruttureInferiore("hotel")
 
 
       
