@@ -12,7 +12,7 @@ function BannerStruttura(props) {
             <h3>{props.struttura.nome}</h3>
 
 
-            <img source={props.struttura.foto} alt="foto" style={{width: "40px;"}}></img>
+           <img src={props.struttura.foto}  width="250" height="250"/>
 
     
             

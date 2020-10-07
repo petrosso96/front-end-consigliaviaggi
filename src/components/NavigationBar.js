@@ -81,7 +81,6 @@ const useStyles = makeStyles((theme) => ({
 ));
 
 export default function NavigationBar(props) {
-  const [isSearching, setIsSearching] = React.useState(false);
   const [ricerca, setFieldRicerca] = React.useState(null);
   const [nomeCity, setCity] = React.useState(null);
   const [prezzoStruttura, setPrezzo] = React.useState(-1);
@@ -110,7 +109,6 @@ export default function NavigationBar(props) {
 
   const ricercaStrutture = (nomeStruttura) => {
 
-    setIsSearching(true);
 
 
     axios.post(`https://consigliaviaggi.herokuapp.com/all/ricerca`, {       

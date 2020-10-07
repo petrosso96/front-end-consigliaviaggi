@@ -1,5 +1,6 @@
 import React,{useEffect,useState } from 'react'
 import Paper from '@material-ui/core/Paper';
+
 import { makeStyles } from '@material-ui/core/styles';
 import BannerStruttura from '../components/BannerStruttura';
 import axios from 'axios';
@@ -123,8 +124,7 @@ export default function Home() {
 
       
 
-        
-
+  
         <div className={classes.root}> 
 
 

@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.css';
-import FormRegistrazioneUtente from'./components/FormRegistrazioneUtente'
+import FormRegistrazioneUtente from'./pagine/FormRegistrazioneUtente'
 import Home from './pagine/Home'
 import {Route, Switch} from 'react-router-dom'
 import Struttura from './pagine/Struttura';
 import NavigationBar from './components/NavigationBar'
 import Ricerca from './pagine/Ricerca';
-import LineeGuida from './components/LineeGuida'
+import LineeGuida from './pagine/LineeGuida'
 import AggiungiStruttura from './pagine/AggiungiStruttura';
-import { LoginPage } from './components/LoginPage';
-import InformazioniUtente from './components/InformazioniUtente';
+import { LoginPage } from './pagine/LoginPage';
+import InformazioniUtente from './pagine/InformazioniUtente';
 import { PrivateRouteUser,PrivateRouteAdmin } from './components/PrivateRoute';
 import { CloudinaryContext } from "cloudinary-react";
 import ModificaStruttura from './pagine/ModificaStruttura';

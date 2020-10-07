@@ -156,8 +156,9 @@ export default function Struttura() {
    
     return(
 
-    <div style={{
-        backgroundImage:url,backgroundRepeat: 'no-repeat',width:'1000px',height:'1000px'
+    <div className="immagine" style={{
+        backgroundImage:url,backgroundRepeat: 'no-repeat',width:'1000px',height:'1000px',
+
     }}> 
         <h1> {nomeStruttura}    {isAdmin && (<Button onClick={modificaStruttura} variant="outlined">Modifica Struttura</Button>)}
         </h1>
@@ -245,16 +246,14 @@ function Recensione(props){
                 "Content-type": "application/json",
                 
             }
-        }).
-        then(response=>{
+        }).then(response=>{
 
 
             console.log(response)
             setNumeroLike(numeroLike+1)
 
             
-        }).
-        catch(error => {
+        }).catch(error => {
             
         })
 
@@ -274,13 +273,11 @@ function Recensione(props){
                 "Content-type": "application/json",
                 
             }
-        }).
-        then(response=>{
+        }).then(response=>{
 
             setNumeroDislike(numeroDislike+1)
 
-        }).
-        catch(error =>{
+        }).catch(error =>{
             console.log(error)
         })
 
